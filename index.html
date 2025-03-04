@@ -1,149 +1,74 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>POPCAT CLASSIC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>請耐心等候</title>
     <style>
-
-        /* 1. 基本設定 */
+        /* 設定全螢幕背景圖片 */
         body {
-            /* 移除預設邊距 */
-            margin: 0;
-            /* 設定字體 */
-            font-family: sans-serif;
-        }
-
-        .container {
-            /* 設定背景色 */
-            background-color: #bdaa90;
-            /* 防止文字被選取 */
-            user-select: none;
-
-            /* 讓內容佔滿整個視窗 */
-            height: 100vh;
-
-            /* 垂直排列內容 */
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            background: url("imgs/貓咪.jpg") no-repeat center center;
+            background-size: cover;
         }
 
-        /* 2. 標題圖片 */
-        .title {
-            /* 上方間距 */
-            margin-top: 2em;
-
-            /* 寬度設定 */
-            width: 80%;
-            max-width: 600px;
-        }
-
-        /* 3. 貓咪圖片 */
-        .cat-img {
-            /* 填滿剩餘空間 */
-            flex: 1;
-
-            /* 寬度設定 */
-            width: 100%;
-            max-width: 800px;
-
-            /* 背景圖片設定 */
-            background-position: bottom;
-            background-size: contain;
-            background-repeat: no-repeat;
-
-            /* 文字置中 */
-            text-align: center;
-            /* 文字樣式 */
+        /* 讓等待文字顯眼 */
+        h1 {
+            font-size: 28px;
             color: white;
-            font-size: 80px;
-            font-weight: 900;
-            -webkit-text-stroke: 3px black;
-
+            background: rgba(0, 0, 0, 0.6); /* 半透明背景讓文字清楚 */
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
         }
 
-        /* 4. 貓咪狀態 */
-        #p {
-            background-image: url("imgs/p.png");
-        }
-        #op {
-            background-image: url("imgs/op.png");
+        /* 跑馬燈 Loading 條 */
+        .loading-bar {
+            width: 200px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2); /* 背景條 */
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
         }
 
+        .loading-bar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -50px;
+            width: 50px;
+            height: 10px;
+            background: #ffcc00; /* 黃色跑馬燈 */
+            border-radius: 5px;
+            animation: marquee 1.5s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { left: -50px; }
+            100% { left: 200px; }
+        }
+
+        /* 輔助文字 */
+        p {
+            color: gray;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-top: 10px;
+        }
     </style>
-
 </head>
-
 <body>
-<div class="container">
-    <img class="title" src="imgs/popcat.svg" alt="POPCAT">
-    <div class="cat-img" id="p">0202</div>
-</div>
-
-<script>
-    //1.計數器初始化
-    let count = 0;
-    //將計數器顯示到HTML元素，用id抓取
-    let catImg = document.getElementById('p');
-    //顯示計數器
-    catImg.textContent = count;
-    //寫一個function計數器累加
-    function addCount() {
-        // 2. 計數器累加
-        count+=1;
-    }
-    //註冊滑鼠按下事件
-    document.addEventListener('mousedown', function () {
-        // 3. 計數器累加
-        addCount();
-        //ˋ4.將計數器顯示到HTML元素
-        catImg.textContent = count;
-
-        catImg.id = 'op';
-
-    });
-
-    document.addEventListener('mouseup', function () {
-
-        catImg.id = 'p';
-
-    });
-    document.addEventListener('mousedown', function () {
-        const audio = new Audio('pops/pop1.mp3');
-        audio.play();
-
-    });
-
-    document.addEventListener('keydown', function () {
-        // 3. 計數器累加
-        addCount();
-        //ˋ4.將計數器顯示到HTML元素
-        catImg.textContent = count;
-
-        catImg.id = 'op';
-
-    });
-
-    document.addEventListener('keyup', function () {
-
-        catImg.id = 'p';
-
-    });
-    document.addEventListener('keydown', function () {
-        const audio = new Audio('pops/pop1.mp3');
-        audio.play();
-
-    });
-
-</script>
-
+<h1>請耐心等候</h1>
+<div class="loading-bar"></div>
+<p>正在載入您的漫畫內容，請稍候...</p>
 </body>
 </html>
